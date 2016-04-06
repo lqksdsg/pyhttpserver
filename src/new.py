@@ -5,3 +5,4 @@ def open_file(file_name):
             print "error"
 def hello():
     print "hello"
+    print "How stupid you are!"
