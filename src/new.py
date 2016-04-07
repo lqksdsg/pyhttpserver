@@ -13,8 +13,8 @@ for j in range(m):
     ips.append(ip)
 
 
-def handle_rule(rawrules):
-    for z in rawrules:
+def handle_rule(raw_rules):
+    for z in raw_rules:
         tmp = z.split(' ')
         if tmp[0] == 'deny':
             ma = handle_netmask(tmp[1])
@@ -34,8 +34,8 @@ def handle_netmask(ru):
         return 0
 
 
-def handle_ip(Ip):
-    Ip_list = Ip.split('/')
+def handle_ip(ip):
+    Ip_list = ip.split('/')
     Ip_l = Ip_list[0].split('.')
     Ip_bin = ''
     for h in Ip_l:
