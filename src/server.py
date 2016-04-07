@@ -1,21 +1,27 @@
 import re
 
-# this is a tokenizer of simple calculator expression
 NAME = r'(?P<NAME>[a-zA-Z_][a-zA-Z_0-9]*)'
 NUM = r'(?P<NUM>\d+)'
 PLUS = r'(?P<PLUS>\+)'
+MINUS = r'(?P<MINUS>\-)'
 TIMES = r'(?P<TIMES>\*)'
 EQ = r'(?P<EQ>\=)'
 WS = r'(?P<WS>\s)'
-tokenizer = re.compile('|'.join([NAME, NUM, PLUS, TIMES, EQ, WS]))
+DEVIDE = r'(?P<DEVIDE>\/)'
+LPAREN = r'(?P<LPAREN>\()'
+RPAREN = r'(?P<RPAREN>\))'
+
+tokenizer = re.compile('|'.join([NAME, NUM, PLUS, TIMES, EQ, WS, DEVIDE, LPAREN, RPAREN]))
 
 
 def generate(pat, text):
     tokens = pat.scanner(text)
     for token in iter(tokens.match, None):
         k = token.lastgroup, token.group()
-        yield k
+        if k[0] != 'WS':
+            yield k
 
 if __name__ == '__main__':
-    for tok in generate(tokenizer, 'foo = 43+334*34+343=23'):
-        print tok
+    for i in generate(tokenizer, "( 1* 2+3)"):
+        print i
+
