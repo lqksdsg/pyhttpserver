@@ -1,4 +1,6 @@
 import re
+
+# this is a tokenizer of simple calculator expression
 NAME = r'(?P<NAME>[a-zA-Z_][a-zA-Z_0-9]*)'
 NUM = r'(?P<NUM>\d+)'
 PLUS = r'(?P<PLUS>\+)'
@@ -13,5 +15,7 @@ def generate(pat, text):
     for token in iter(tokens.match, None):
         k = token.lastgroup, token.group()
         yield k
-for tok in generate(tokenizer, 'foo = 43+334*34+343=23'):
-    print tok
+
+if __name__ == '__main__':
+    for tok in generate(tokenizer, 'foo = 43+334*34+343=23'):
+        print tok
